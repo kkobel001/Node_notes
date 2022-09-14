@@ -6,4 +6,4 @@ const Note = mongoose.model("Note", {
     body:String
 });
 
-module.exports =Note;
+module.exports = Note;
