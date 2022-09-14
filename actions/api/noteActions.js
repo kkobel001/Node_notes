@@ -14,11 +14,23 @@ class NoteActions {
 
         res.send('Notatka została stworzona' + title + body)
 }
-        getAllNotes(req,res){
-            res.send('API działa')
+     async getAllNotes(req,res){
+        let doc;
+        try{
+            const doc = await Note.find({})
+        }
+        catch(err) {
+            return   res.status(500).json({message:err.message});
+        }
+        
+            res.status(200).json(doc);          
 }
-        getNote(req,res){    
-            res.send('Informacja o notatce')
+      async  getNote(req,res){    
+        const id= req.params.id;
+
+        const note = await Note.findOne({_id:id})
+        res.status(200).json(note);          
+
 }
          updateNote(req,res){   
              res.send('Notatka zaktualizowana')
