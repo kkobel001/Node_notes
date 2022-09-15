@@ -1,18 +1,20 @@
 const Note = require('../../db/note.js');
 
 class NoteActions {
-    saveNote(req,res){
-        // const newNote = new Note({
-        //     title:'Zrobic zakupy',
-        //     body:'mleko, woda, cukierki'
-        // })
-        // newNote.save().then(()=> {
-        //     console.log('notatka została zapisana')
-        // })
+   async saveNote(req,res){
         const title=req.body.titile;
         const body = req.body.body
+        let note;
+        try{
+            const note = new Note({ title:title,body:body});
+            await note.save();
 
-        res.send('Notatka została stworzona' + title + body)
+        }
+        catch(err) {
+            return res.status(422).json({message:err.message});
+        }
+                 
+        res.status(201).json(note);
 }
      async getAllNotes(req,res){
         let doc;
@@ -20,24 +22,33 @@ class NoteActions {
             const doc = await Note.find({})
         }
         catch(err) {
-            return   res.status(500).json({message:err.message});
+            return res.status(500).json({message:err.message});
         }
-        
             res.status(200).json(doc);          
 }
       async  getNote(req,res){    
         const id= req.params.id;
-
         const note = await Note.findOne({_id:id})
         res.status(200).json(note);          
+}
+    async updateNote(req,res){   
+        const id= req.params.id;
+        const title= req.body.title;
+        const body = req.body.body;
+
+        const note =await Note.findOne({_id:id});
+        note.title=title;
+        note.body =body;
+
+        await note.save()
+
+        res.status(201).json(note);
 
 }
-         updateNote(req,res){   
-             res.send('Notatka zaktualizowana')
-}
-         deleteNote(req,res){
+       async  deleteNote(req,res){
             const id = req.params.id;
-            res.send('Nototka usunięta , Id:' + id)
+            await Note.deleteOne({_id:id});
+            res.sendStatus(204);
 
 }}
 
