@@ -1,4 +1,4 @@
-const Note = require('../../db/note.js');
+const Note = require('../../backend/db/note.js.js');
 
 class NoteActions {
    async saveNote(req,res){

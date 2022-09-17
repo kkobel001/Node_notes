@@ -1,7 +1,7 @@
 const express = require('express');
 const router= express.Router();
 
-const noteActions = require('../actions/api/noteActions')
+const noteActions = require('../backend/actions/api/noteActions')
 
 
 router.get('/notes', noteActions.getAllNotes);

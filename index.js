@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 
 //db
-require('./db/mongoose')
+require('./backend/db/mongoose')
 
 
 //server
