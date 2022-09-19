@@ -1,23 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const SingleNote = ({title,body, onDelete}) => {
 
-
-
-
-const SingleNote = ({title,body}) => {
-
-    
     <div className='note'>
         <p>{title}</p>
         <div className='description'>
             {body}
         </div>
-            <button>Edytuj</button>
+            <button className='delete' onClick={onDelete}>Usuń</button>
     </div>
-
-
-
 }
 
 

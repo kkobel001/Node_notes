@@ -13,23 +13,25 @@ const infoNotes= [
         body: "pamietaj zeby kupic mleko"
     },
 ]
+const deleteNotes= (id) => infoNotes.filter(notes=> notes.id !== id);
 
 const Notes = () => {
-    
+
+
     return (
         <div> 
         <p>Moje notatki: </p>  
        {infoNotes.map((note)=> (
         <SingleNote
-         title={note.title} 
-         body={note.body} 
-         id={note.id}/>
+            key={note.id}
+            title={note.title} 
+            body={note.body} 
+            id={note.id}
+            onDelete={deleteNotes}
+         />
        ))}
     </div>
-
     )
-    
-
 }
    
 export default Notes;
