@@ -1,5 +1,7 @@
 import React from 'react';
+import NewNote from './NewNote/NewNote';
 import SingleNote from './SingleNote/SingleNote';
+
 
 const infoNotes= [
     {
@@ -14,13 +16,17 @@ const infoNotes= [
     },
 ]
 const deleteNotes= (id) => infoNotes.filter(notes=> notes.id !== id);
+const addNote =(note)=> {
+    const notes =[...infoNotes, note]
+    notes=infoNotes;
+}
 
 const Notes = () => {
-
 
     return (
         <div> 
         <p>Moje notatki: </p>  
+        <NewNote addnote={(note)=>addNote(note)}  />
        {infoNotes.map((note)=> (
         <SingleNote
             key={note.id}
