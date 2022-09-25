@@ -1,13 +1,22 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
-const SingleNote = ({title,body, onDelete}) => {
+const SingleNote = ({title,body, onDelete, onEdit,id}) => {
     const [showNote, setShowNote] = useState(false);
 
     const handleClick = () => {
         setShowNote(!showNote);
       };
-return(
+
+      const editHandler=()=>{
+        onEdit({
+            title:title,
+            body:body,
+            id:id
+        })
+      }
+
+    return(
 
     <div className='note'>
         <p onClick={handleClick}>{title}</p>
@@ -18,7 +27,9 @@ return(
             </div>
             : null
         }
-        <button className='delete' onClick={onDelete}>Usuń</button>
+        <button className='delete' onClick={onDelete(id)}>Usuń</button>
+        <button className='Edytuj' onClick={editHandler}>Edytuj</button>
+
     </div>
         
         
@@ -33,7 +44,9 @@ return(
 
 SingleNote.propTypes = {
     title: PropTypes.string,
-    body: PropTypes.string
+    body: PropTypes.string,
+    onDelete:PropTypes.func,
+    onEdit:PropTypes.func,
   };
 
 
